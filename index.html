@@ -1,12 +1,3 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Reproductor de Audio con Avatares WebP</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="avatars.css?v=1.3.6.6">
-</head>
 <body>
 
     <div class="audio-player">
@@ -62,70 +53,84 @@
     </div>
 
     <div class="sections-container">
-         <section class="content-section">
-            <h2>Sección 1</h2>
-            <div class="containers-wrapper">
-                <div class="content-container">
-                    <button class="container-play-btn" data-audio-index="1">
-                        <i class="fas fa-play"></i>
-                    </button>
-                    <div class="webp-overlay-container">
-                        <img class="overlay-webp" src="" alt="Contenido WebP">
-                    </div>
-                    <h3>Contenedor 1</h3>
-                    <p>Este contenedor reproduce el primer audio del avatar seleccionado.</p>
-                    <div class="audio-indicator">
-                        <i class="fas fa-volume-up"></i>
-                        <span>Reproduciendo contenido</span>
-                    </div>
+        <h2 class="section-title">Sección 1</h2>
+        <div class="containers-wrapper">
+            <div class="content-container">
+                <button class="container-play-btn" data-audio-index="1">
+                    <i class="fas fa-play"></i>
+                </button>
+                <div class="webp-overlay-container">
+                    <img class="overlay-webp" src="" alt="Contenido WebP">
                 </div>
-
-                <div class="content-container">
-                    <button class="container-play-btn" data-audio-index="2">
-                        <i class="fas fa-play"></i>
-                    </button>
-                    <div class="webp-overlay-container">
-                        <img class="overlay-webp" src="" alt="Contenido WebP">
-                    </div>
-                    <h3>Contenedor 2</h3>
-                    <p>Este contenedor reproduce el segundo audio del avatar seleccionado.</p>
-                    <div class="audio-indicator">
-                        <i class="fas fa-volume-up"></i>
-                        <span>Reproduciendo contenido</span>
-                    </div>
+                <h3>Contenedor 1</h3>
+                <p>Este contenedor reproduce el primer audio del avatar seleccionado.</p>
+                <div class="progress-bar-container">
+                    <div class="progress-fill"></div>
                 </div>
-
-                <div class="content-container">
-                    <button class="container-play-btn" data-audio-index="3">
-                        <i class="fas fa-play"></i>
-                    </button>
-                    <div class="webp-overlay-container">
-                        <img class="overlay-webp" src="" alt="Contenido WebP">
-                    </div>
-                    <h3>Contenedor 3</h3>
-                    <p>Este contenedor reproduce el tercer audio del avatar seleccionado.</p>
-                    <div class="audio-indicator">
-                        <i class="fas fa-volume-up"></i>
-                        <span>Reproduciendo contenido</span>
-                    </div>
+                <div class="progress-time">
+                    <span class="current-time">0:00</span>
+                    <span class="duration">0:00</span>
                 </div>
-
-                <div class="content-container">
-                    <button class="container-play-btn" data-audio-index="4">
-                        <i class="fas fa-play"></i>
-                    </button>
-                    <div class="webp-overlay-container">
-                        <img class="overlay-webp" src="" alt="Contenido WebP">
-                    </div>
-                    <h3>Contenedor 4</h3>
-                    <p>Este contenedor reproduce el cuarto audio del avatar seleccionado.</p>
-                    <div class="audio-indicator">
-                        <i class="fas fa-volume-up"></i>
-                        <span>Reproduciendo contenido</span>
-                    </div>
-                </div>
+                <div class="pause-info">La pausa reiniciará el audio</div>
             </div>
-        </section>
+
+            <div class="content-container">
+                <button class="container-play-btn" data-audio-index="2">
+                    <i class="fas fa-play"></i>
+                </button>
+                <div class="webp-overlay-container">
+                    <img class="overlay-webp" src="" alt="Contenido WebP">
+                </div>
+                <h3>Contenedor 2</h3>
+                <p>Este contenedor reproduce el segundo audio del avatar seleccionado.</p>
+                <div class="progress-bar-container">
+                    <div class="progress-fill"></div>
+                </div>
+                <div class="progress-time">
+                    <span class="current-time">0:00</span>
+                    <span class="duration">0:00</span>
+                </div>
+                <div class="pause-info">La pausa reiniciará el audio</div>
+            </div>
+
+            <div class="content-container">
+                <button class="container-play-btn" data-audio-index="3">
+                    <i class="fas fa-play"></i>
+                </button>
+                <div class="webp-overlay-container">
+                    <img class="overlay-webp" src="" alt="Contenido WebP">
+                </div>
+                <h3>Contenedor 3</h3>
+                <p>Este contenedor reproduce el tercer audio del avatar seleccionado.</p>
+                <div class="progress-bar-container">
+                    <div class="progress-fill"></div>
+                </div>
+                <div class="progress-time">
+                    <span class="current-time">0:00</span>
+                    <span class="duration">0:00</span>
+                </div>
+                <div class="pause-info">La pausa reiniciará el audio</div>
+            </div>
+
+            <div class="content-container">
+                <button class="container-play-btn" data-audio-index="4">
+                    <i class="fas fa-play"></i>
+                </button>
+                <div class="webp-overlay-container">
+                    <img class="overlay-webp" src="" alt="Contenido WebP">
+                </div>
+                <h3>Contenedor 4</h3>
+                <p>Este contenedor reproduce el cuarto audio del avatar seleccionado.</p>
+                <div class="progress-bar-container">
+                    <div class="progress-fill"></div>
+                </div>
+                <div class="progress-time">
+                    <span class="current-time">0:00</span>
+                    <span class="duration">0:00</span>
+                </div>
+                <div class="pause-info">La pausa reiniciará el audio</div>
+            </div>
+        </div>
     </div>
 
     <div class="micro-alert" id="microAlert">Toca de nuevo para escuchar</div>
@@ -133,7 +138,3 @@
     <audio id="backgroundMusic" loop preload="none">
         <source src="audio/background.mp3" type="audio/mp3">
     </audio>
-
-    <script src="avatars.js"></script>
-</body>
-</html>
