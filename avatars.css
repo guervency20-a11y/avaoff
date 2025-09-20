@@ -1,829 +1,788 @@
 /* ==========================================================================
-           Nuevo Tema Onyx - Base y Diseño General
-           ========================================================================== */
-        :root {
-            /* Paleta de colores Onyx */
-            --bg-gradient-onyx: linear-gradient(to bottom right, hsl(240, 1%, 25%) 3%, hsl(0, 0%, 19%) 97%);
-            --bg-gradient-jet: linear-gradient(to bottom right, hsla(240, 1%, 18%, 0.251) 0%, hsla(240, 2%, 11%, 0) 100%), hsl(240, 2%, 13%);
-            --bg-gradient-yellow-1: linear-gradient(to bottom right, hsl(45, 100%, 71%) 0%, hsla(36, 100%, 69%, 0) 50%);
-            --bg-gradient-yellow-2: linear-gradient(135deg, hsla(45, 100%, 71%, 0.251) 0%, hsla(35, 100%, 68%, 0) 59.86%), hsl(240, 2%, 13%);
-            --border-gradient-onyx: linear-gradient(to bottom right, hsl(0, 0%, 25%) 0%, hsla(0, 0%, 25%, 0) 50%);
-            --text-gradient-yellow: linear-gradient(to right, hsl(45, 100%, 72%), hsl(35, 100%, 68%));
-            
-            /* Colores base */
-            --jet: hsl(0, 0%, 22%); 
-            --onyx: hsl(240, 1%, 17%); 
-            --eerie-black-1: hsl(240, 2%, 13%); 
-            --eerie-black-2: hsl(240, 2%, 12%); 
-            --smoky-black: hsl(0, 0%, 7%); 
-            --white-1: hsl(0, 0%, 100%); 
-            --white-2: hsl(0, 0%, 98%); 
-            --orange-yellow-crayola: hsl(45, 100%, 72%); 
-            --vegas-gold: hsl(45, 100%, 72%); 
-            --light-gray: hsl(0, 0%, 84%); 
-            --light-gray-70: hsla(0, 0%, 84%, 0.7); 
-            --bittersweet-shimmer: hsl(0, 43%, 51%);
-            
-            /* Fuentes y tamaños */
-            --ff-poppins: 'Poppins', sans-serif; 
-            --fs-1: 24px; 
-            --fs-2: 18px; 
-            --fs-3: 17px; 
-            --fs-4: 16px; 
-            --fs-5: 15px; 
-            --fs-6: 14px; 
-            --fs-7: 13px; 
-            --fs-8: 11px; 
-            --fw-300: 300; 
-            --fw-400: 400; 
-            --fw-500: 500; 
-            --fw-600: 600; 
-            
-            /* Sombras */
-            --shadow-1: -4px 8px 24px hsla(0, 0%, 0%, 0.25); 
-            --shadow-2: 0 16px 30px hsla(0, 0%, 0%, 0.25); 
-            --shadow-3: 0 16px 40px hsla(0, 0%, 0%, 0.25); 
-            --shadow-4: 0 25px 50px hsla(0, 0%, 0%, 0.15); 
-            --shadow-5: 0 24px 80px hsla(0, 0%, 0%, 0.25);
-            
-            /* Transiciones */
-            --transition-1: 0.25s ease; 
-            --transition-2: 0.5s ease-in-out;
-            
-            /* Estilos de "Glassmorphism" adaptados */
-            --glass-bg: rgba(30, 30, 30, 0.92);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            
-            /* Colores de texto */
-            --text-primary: var(--white-1);
-            --text-secondary: var(--light-gray);
-            --text-light: var(--white-1);
-            
-            /* Gradientes para elementos UI */
-            --primary-gradient: var(--bg-gradient-jet);
-            --secondary-gradient: var(--bg-gradient-yellow-1);
-            --music-gradient: var(--bg-gradient-yellow-2);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: var(--bg-gradient-onyx);
-            min-height: 100vh;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            overflow-x: hidden;
-            color: var(--text-primary);
-        }
-
-        /* ==========================================================================
-           Reproductor de Audio Principal
-           ========================================================================== */
-        .audio-player {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            transition: all 0.5s var(--transition-1);
-            transform: translateZ(0);
-            animation: floatSmooth 6s ease-in-out infinite;
-            user-select: none;
-            -webkit-user-select: none;
-        }
-
-        .audio-player.dragging {
-            transition: none !important;
-            animation: none !important;
-            cursor: grabbing !important;
-            filter: drop-shadow(0 25px 50px rgba(0,0,0,0.3));
-            transform: scale(1.05) !important;
-        }
-
-        @keyframes floatSmooth {
-            0%, 100% { transform: translateY(0) rotateZ(0deg); }
-            25% { transform: translateY(-5px) rotateZ(0.5deg); }
-            75% { transform: translateY(5px) rotateZ(-0.5deg); }
-        }
-
-        /* --- Barra extendida --- */
-        .player-extended {
-            width: 0;
-            height: 70px;
-            border-radius: 35px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(30px) saturate(180%);
-            -webkit-backdrop-filter: blur(30px) saturate(180%);
-            box-shadow: var(--shadow-3), 
-                        inset 0 1px 0 rgba(255,255,255,0.1);
-            position: relative;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            padding: 0 20px;
-            opacity: 0;
-            transition: all 0.5s var(--transition-1);
-            margin-right: 3px;
-            border: 1px solid var(--glass-border);
-            overflow: hidden;
-        }
-
-        .expanded .player-extended {
-            width: 520px;
-            opacity: 1;
-        }
-
-        /* --- Avatar circular --- */
-        .player-closed {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: var(--glass-bg);
-            backdrop-filter: blur(30px) saturate(180%);
-            -webkit-backdrop-filter: blur(30px) saturate(180%);
-            box-shadow: var(--shadow-2);
-            position: relative;
-            transition: all 0.4s var(--transition-1);
-            cursor: pointer;
-            overflow: hidden;
-            border: 2px solid var(--glass-border);
-        }
-
-        .player-closed:hover {
-            transform: scale(1.08);
-            box-shadow: var(--shadow-4);
-        }
-
-        .avatar-image {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 65px;
-            height: 65px;
-            border-radius: 50%;
-            object-fit: cover;
-            transition: all 0.3s ease;
-            opacity: 0;
-            transform: translate(-50%, -50%);
-            will-change: transform, opacity;
-            backface-visibility: hidden;
-        }
-
-        .avatar-image.active {
-            opacity: 1;
-            animation: subtlePulse 2s ease-in-out infinite;
-        }
-
-        @keyframes subtlePulse {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); }
-            50% { transform: translate(-50%, -50%) scale(1.05); }
-        }
-
-        /* ==========================================================================
-           Botones y Controles del Reproductor
-           ========================================================================== */
-        /* --- Botón de expansión --- */
-        .expand-button {
-            width: 35px;
-            height: 70px;
-            background: var(--primary-gradient);
-            border-radius: 18px 0 0 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: -8px 8px 20px rgba(0, 0, 0, 0.35);
-            cursor: pointer;
-            transition: all 0.4s var(--transition-1);
-            z-index: 1001;
-            position: relative;
-            margin-right: -3px;
-            border: 1px solid rgba(255,255,255,0.15);
-        }
-
-        .expand-button::before {
-            content: '‹';
-            color: var(--text-light);
-            font-size: 26px;
-            font-weight: 300;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-            transition: all 0.3s ease;
-            transform: translateX(-2px);
-        }
-
-        .expanded .expand-button::before {
-            content: '›';
-            transform: translateX(2px);
-        }
-
-        .expand-button:hover {
-            transform: translateX(-3px) scale(1.02);
-            box-shadow: -12px 12px 30px rgba(0, 0, 0, 0.5);
-        }
-
-        /* --- Botón de Play Principal --- */
-        .play-button-main {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: var(--primary-gradient);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35), inset 0 2px 4px rgba(255,255,255,0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            flex-shrink: 0;
-        }
-
-        .play-button-main:hover {
-            transform: scale(1.12);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        }
-
-        .play-icon {
-            width: 0;
-            height: 0;
-            border-left: 14px solid var(--text-light);
-            border-top: 8px solid transparent;
-            border-bottom: 8px solid transparent;
-            margin-left: 3px;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
-        }
-
-        .play-button-main.playing .play-icon {
-            width: 16px;
-            height: 16px;
-            border: none;
-            background: linear-gradient(90deg, white 35%, transparent 35%, transparent 65%, white 65%);
-            margin-left: 0;
-        }
-
-        /* --- Botones de Navegación, Narrador y Música --- */
-        .nav-button, .narrators-button, .music-button {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            flex-shrink: 0;
-            position: relative;
-            color: var(--text-light);
-        }
-
-        .nav-button {
-            background: linear-gradient(145deg, #4a4a4a, #2c2c2c);
-            box-shadow: 0 3px 8px rgba(0,0,0,0.2), inset 0 1px 3px rgba(255,255,255,0.15);
-        }
-        .narrators-button {
-            background: var(--secondary-gradient);
-            box-shadow: 0 4px 15px rgba(245, 87, 108, 0.25);
-        }
-        .music-button {
-            background: var(--music-gradient);
-            box-shadow: 0 4px 15px rgba(0, 153, 255, 0.25);
-        }
-
-        .nav-button:hover, .narrators-button:hover, .music-button:hover {
-            transform: scale(1.12);
-        }
-
-        .narrators-button::before { content: '👥'; font-size: 20px; }
-        .music-button::before { content: '♪'; font-size: 22px; }
-
-        /* Estilo para botón de música desactivado con línea */
-        .music-button.muted {
-            position: relative;
-            filter: grayscale(50%) brightness(0.8);
-        }
-
-        .music-button.muted::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 32px;
-            height: 2px;
-            background: #ff4757;
-            transform: translate(-50%, -50%) rotate(-45deg);
-            border-radius: 1px;
-            box-shadow: 0 0 4px rgba(255, 71, 87, 0.5);
-        }
-
-        .music-button.active {
-            transform: scale(1.1);
-            box-shadow: 0 0 20px rgba(0, 217, 255, 0.4);
-        }
-
-        /* ==========================================================================
-           Selector de Narradores
-           ========================================================================== */
-        .narrators-selector {
-            position: absolute;
-            top: calc(100% + 15px);
-            left: 50%;
-            transform: translateX(-50%) translateY(10px) scale(0.9);
-            width: max-content;
-            max-width: 320px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px) saturate(180%);
-            border-radius: 20px;
-            padding: 12px;
-            box-shadow: var(--shadow-3);
-            display: flex;
-            gap: 12px;
-            opacity: 0;
-            transition: all 0.3s var(--transition-1);
-            pointer-events: none;
-            z-index: 1001;
-            border: 1px solid var(--glass-border);
-        }
-
-        /* Selector que se abre hacia arriba cuando está cerca del borde inferior */
-        .narrator-control.open-upward .narrators-selector {
-            top: auto;
-            bottom: calc(100% + 15px);
-            transform: translateX(-50%) translateY(-10px) scale(0.9);
-        }
-
-        .narrator-control.is-open .narrators-selector {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0) scale(1);
-            pointer-events: all;
-        }
-
-        .narrator-control.is-open.open-upward .narrators-selector {
-            transform: translateX(-50%) translateY(0) scale(1);
-        }
-
-        .narrator-option {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: var(--secondary-gradient);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-            cursor: pointer;
-            transition: all 0.25s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .narrator-option .preview-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.95;
-        }
-
-        .narrator-option:hover {
-            transform: scale(1.15) translateY(-4px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-        }
-
-        .narrator-option.active {
-            box-shadow: 0 0 0 3px rgba(255,255,255,0.9),
-                        0 0 0 6px var(--secondary-gradient);
-            transform: scale(1.08);
-        }
-
-        .narrator-option::after {
-            content: attr(data-name);
-            position: absolute;
-            bottom: -22px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 10px;
-            color: var(--text-secondary);
-            font-weight: 600;
-        }
-
-        .narrator-option.in-use::after {
-            content: 'En uso';
-            color: var(--orange-yellow-crayola);
-            font-weight: bold;
-        }
-
-        /* ==========================================================================
-           Progreso y Ecualizador
-           ========================================================================== */
-        .progress-container {
-            flex-grow: 1;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            min-width: 0;
-        }
-
-        .progress-bar {
-            height: 6px;
-            flex-grow: 1;
-            background: rgba(0,0,0,0.08);
-            border-radius: 3px;
-            cursor: pointer;
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
-            transition: height 0.2s ease;
-        }
-        .progress-bar:hover {
-            height: 8px;
-        }
-
-        .progress-fill {
-            height: 100%;
-            width: 0%;
-            background: var(--primary-gradient);
-            border-radius: 3px;
-            position: relative;
-            transition: width 0.2s ease;
-        }
-
-        .progress-fill::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            right: -6px;
-            width: 14px;
-            height: 14px;
-            background: var(--text-light);
-            border: 3px solid var(--vegas-gold);
-            border-radius: 50%;
-            transform: translateY(-50%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        .progress-bar:hover .progress-fill::after {
-            opacity: 1;
-        }
-
-        .time-display {
-            font-size: 12px;
-            color: var(--text-secondary);
-            min-width: 45px;
-            text-align: center;
-            font-weight: 600;
-        }
-
-        .equalizer {
-            display: flex;
-            gap: 3px;
-            align-items: flex-end;
-            height: 24px;
-            margin-right: 8px;
-        }
-
-        .eq-bar {
-            width: 4px;
-            background: var(--primary-gradient);
-            border-radius: 2px;
-            height: 5px;
-            animation: equalizerDance 1.2s infinite ease-in-out;
-        }
-
-        .eq-bar:nth-child(1) { animation-delay: 0s; }
-        .eq-bar:nth-child(2) { animation-delay: 0.3s; }
-        .eq-bar:nth-child(3) { animation-delay: 0.6s; }
-        .eq-bar:nth-child(4) { animation-delay: 0.9s; }
-        .eq-bar:nth-child(5) { animation-delay: 1.2s; }
-
-        @keyframes equalizerDance {
-            0%, 100% { height: 5px; }
-            50% { height: 20px; }
-        }
-
-        /* ==========================================================================
-           Secciones de Contenido
-           ========================================================================== */
-        .sections-container {
-            max-width: 1400px;
-            margin: 120px auto 50px;
-            padding: 0 20px;
-            width: 100%;
-        }
-
-        .content-section {
-            margin-bottom: 60px;
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 24px;
-            padding: 40px;
-            backdrop-filter: blur(20px);
-            box-shadow: var(--shadow-3);
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .content-section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 35px;
-            text-align: center;
-            color: var(--text-light);
-            position: relative;
-            padding-bottom: 20px;
-            font-weight: 800;
-            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
-        }
-
-        .content-section h2:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 120px;
-            height: 4px;
-            background: var(--primary-gradient);
-            border-radius: 2px;
-        }
-
-        .containers-wrapper {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .content-container {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: var(--shadow-2);
-            position: relative;
-            transition: all 0.3s var(--transition-1);
-            border: 1px solid var(--glass-border);
-        }
-
-        .content-container:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-3);
-        }
-
-        .container-play-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background: var(--primary-gradient);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
-            border: none;
-            z-index: 10;
-            transition: all 0.3s ease;
-        }
-
-        .container-play-btn:hover {
-            transform: scale(1.15) rotate(90deg);
-        }
-
-        .container-play-btn i {
-            color: var(--text-light);
-            font-size: 18px;
-        }
-
-        .content-container h3 {
-            color: var(--text-primary);
-            margin-bottom: 18px;
-            font-size: 1.6rem;
-            font-weight: 700;
-        }
-
-        .content-container p {
-            color: var(--text-secondary);
-            line-height: 1.7;
-            margin-bottom: 20px;
-            font-size: 0.95rem;
-        }
-
-        .audio-indicator {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-            margin-top: 15px;
-        }
-
-        /* ==========================================================================
-           WebP Overlay
-           ========================================================================== */
-        .webp-overlay-container {
-            position: absolute;
-            top: 42px;
-            right: 42px;
-            width: 100px;
-            height: 100px;
-            background: var(--text-primary);
-            border-radius: 50%;
-            z-index: 20;
-            overflow: hidden;
-            box-shadow: var(--shadow-3), 
-                        0 0 0 3px rgba(255, 255, 255, 0.9);
-            transform: translate(50%, -50%) scale(0);
-            opacity: 0;
-            pointer-events: none;
-            transition: all 0.4s var(--transition-1);
-        }
-
-        .webp-overlay-container.visible {
-            transform: translate(50%, -50%) scale(1);
-            opacity: 1;
-            pointer-events: all;
-            animation: overlayPulse 2s ease-in-out infinite;
-        }
-
-        @keyframes overlayPulse {
-            50% { box-shadow: var(--shadow-4), 0 0 0 5px rgba(255, 255, 255, 0.95); }
-        }
-
-        .overlay-webp {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            cursor: pointer;
-        }
-
-        /* ==========================================================================
-           Mejoras Adicionales y Responsive Design
-           ========================================================================== */
-        /* --- Centrado del reproductor expandido (SOLO HORIZONTAL) --- */
-        .audio-player.player-centered {
-            left: 50% !important;
-            transform: translateX(-50%) !important;
-            transition: left 0.5s var(--transition-1), 
-                        transform 0.5s var(--transition-1);
-            animation: none !important;
-        }
-
-        /* --- Micro-alerta --- */
-        .micro-alert {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            padding: 10px 20px;
-            border-radius: 8px;
-            box-shadow: var(--shadow-2);
-            color: var(--text-light);
-            font-size: 14px;
-            z-index: 2000;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            pointer-events: none;
-        }
-
-        .micro-alert.show {
-            opacity: 1;
-        }
-
-        /* --- Diseño Adaptable (Responsive) --- */
-        @media (max-width: 768px) {
-            .expanded .player-extended {
-                width: calc(100vw - 80px);
-                max-width: 400px;
-                gap: 10px;
-            }
-            .equalizer {
-                display: none;
-            }
-        }
-
-        @media (max-width: 480px) {
-            body { padding: 10px; }
-
-            .audio-player { top: 10px; right: 10px; }
-            
-            .expanded .player-extended {
-                width: calc(100vw - 60px);
-                height: 60px;
-            }
-            
-            .nav-button, .narrators-button, .music-button {
-                width: 35px;
-                height: 35px;
-            }
-            
-            .play-button-main { width: 40px; height: 40px; }
-            .expand-button { width: 30px; height: 60px; }
-            .player-closed { width: 70px; height: 70px; }
-            .avatar-image { width: 55px; height: 55px; }
-
-            .narrator-option { width: 48px; height: 48px; }
-            
-            .content-section { padding: 20px; }
-            .content-section h2 { font-size: 1.8rem; }
-            .content-container { padding: 20px; }
-        }
-
-        /* Permitir que el selector de avatares sea visible */
-        .player-extended, .narrator-control {
-            overflow: visible;
-        }
-
-        /* Efectos adicionales durante el arrastre */
-        .audio-player.dragging {
-            transition: none !important;
-            animation: none !important;
-        }
-
-        .audio-player.dragging .player-closed {
-            cursor: grabbing !important;
-            transform: scale(1.1) !important;
-            box-shadow: 
-                0 25px 60px rgba(0,0,0,0.3),
-                0 0 0 3px var(--orange-yellow-crayola) !important;
-        }
-
-        .audio-player.dragging .player-closed .avatar-image {
-            filter: brightness(1.1);
-        }
-
-        /* Desactivar selección de texto durante el arrastre */
-        .audio-player.dragging,
-        .audio-player.dragging * {
-            user-select: none !important;
-            -webkit-user-select: none !important;
-            -moz-user-select: none !important;
-            -ms-user-select: none !important;
-        }
-
-        /* Indicador visual de área arrastrable */
-        .player-closed:hover:not(.dragging) {
-            box-shadow: 
-                0 0 0 2px var(--orange-yellow-crayola),
-                12px 12px 24px rgba(0,0,0,0.15),
-                -12px -12px 24px rgba(255,255,255,0.1);
-        }
-
-        /* Transición suave al soltar */
-        .audio-player:not(.dragging) {
-            transition: left 0.3s ease, top 0.3s ease, transform 0.3s ease;
-        }
-
-        /* Optimizaciones GPU */
-        .avatar-image, .overlay-webp {
-            will-change: transform, opacity;
-            backface-visibility: hidden;
-            transform: translateZ(0);
-        }
-
-        /* Asegurar que el avatar mantenga su forma circular durante el arrastre */
-        .audio-player {
-            contain: layout;
-        }
-
-        .player-closed {
-            position: relative;
-            z-index: 1002;
-        }
-
-        /* Mejoras para el arrastre seguro */
-        .audio-player.dragging {
-            z-index: 10000;
-        }
-
-        @media (max-width: 768px) {
-            .audio-player {
-                backdrop-filter: none;
-            }
-
-            .audio-player .player-closed {
-                box-shadow: none !important;
-            }
-
-            .content-container {
-                box-shadow: none;
-            }
-        }
-
-        .content-container .container-play-btn {
-            transition: all 0.3s ease;
-        }
-        
-        .content-container.playing .container-play-btn {
-            background: var(--secondary-gradient);
-        }
-        
-        .content-container .audio-indicator {
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .content-container.playing .audio-indicator {
-            opacity: 1;
-        }
+      Paleta de colores Premium y Estilos Fusionados (Versión Corregida)
+    ========================================================================== */
+:root {
+    /* Colores base refinados (del segundo CSS) */
+    --rich-black: hsl(220, 13%, 18%);
+    --charcoal: hsl(220, 12%, 25%);
+    --slate-gray: hsl(220, 11%, 32%);
+    --warm-gray: hsl(220, 8%, 42%);
+    --light-slate: hsl(220, 12%, 55%);
+
+    /* Colores cálidos y dorados (del segundo CSS) */
+    --champagne-gold: hsl(48, 100%, 85%);
+    --golden-amber: hsl(45, 100%, 70%);
+    --bronze-gold: hsl(38, 85%, 62%);
+    --warm-bronze: hsl(35, 75%, 55%);
+    --deep-gold: hsl(42, 95%, 48%);
+
+    /* Acentos elegantes (del segundo CSS) */
+    --pearl-white: hsl(48, 15%, 95%);
+    --cream-white: hsl(45, 25%, 92%);
+    --soft-ivory: hsl(48, 20%, 88%);
+    --warm-accent: hsl(25, 95%, 65%);
+    --coral-accent: hsl(15, 85%, 70%);
+
+    /* Gradientes RECONSTRUIDOS con la nueva paleta */
+    --bg-gradient-onyx: linear-gradient(to bottom right, var(--charcoal) 3%, var(--rich-black) 97%);
+    --bg-gradient-jet: linear-gradient(to bottom right, hsla(220, 12%, 25%, 0.251) 0%, hsla(220, 13%, 18%, 0) 100%), var(--rich-black);
+    --bg-gradient-yellow-1: linear-gradient(135deg, var(--golden-amber) 0%, var(--bronze-gold) 100%); /* Gradiente dorado para botones de acción */
+    --bg-gradient-yellow-2: linear-gradient(135deg, hsla(45, 100%, 70%, 0.251) 0%, hsla(38, 85%, 62%, 0) 59.86%), var(--rich-black);
+    --border-gradient-onyx: linear-gradient(to bottom right, var(--slate-gray) 0%, hsla(220, 11%, 32%, 0) 50%);
+    --text-gradient-yellow: linear-gradient(to right, var(--golden-amber), var(--bronze-gold));
+
+    /* Fuentes y tamaños (del primer CSS) */
+    --ff-poppins: 'Poppins', sans-serif;
+    --fs-1: 24px;
+    --fs-2: 18px;
+    --fs-3: 17px;
+    --fs-4: 16px;
+    --fs-5: 15px;
+    --fs-6: 14px;
+    --fs-7: 13px;
+    --fs-8: 11px;
+    --fw-300: 300;
+    --fw-400: 400;
+    --fw-500: 500;
+    --fw-600: 600;
+
+    /* Sombras (conservadas del primer CSS) */
+    --shadow-1: -4px 8px 24px hsla(0, 0%, 0%, 0.25);
+    --shadow-2: 0 16px 30px hsla(0, 0%, 0%, 0.25);
+    --shadow-3: 0 16px 40px hsla(0, 0%, 0%, 0.25);
+    --shadow-4: 0 25px 50px hsla(0, 0%, 0%, 0.15);
+    --shadow-5: 0 24px 80px hsla(0, 0%, 0%, 0.25);
+
+    /* Transiciones */
+    --transition-1: 0.25s ease;
+    --transition-2: 0.5s ease-in-out;
+
+    /* Estilos de "Glassmorphism" adaptados a la nueva paleta */
+    --glass-bg: rgba(30, 30, 40, 0.85);
+    --glass-border: rgba(255, 215, 0, 0.1);
+
+    /* Colores de texto */
+    --text-primary: var(--pearl-white);
+    --text-secondary: var(--soft-ivory);
+    --text-light: var(--pearl-white);
+
+    /* Gradientes para elementos UI */
+    --primary-gradient: var(--bg-gradient-jet);
+    --secondary-gradient: var(--bg-gradient-yellow-1);
+    --music-gradient: var(--bg-gradient-yellow-2);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--ff-poppins), sans-serif;
+    background: var(--bg-gradient-onyx);
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow-x: hidden;
+    color: var(--text-primary);
+}
+
+/* ==========================================================================
+      Reproductor de Audio Principal
+    ========================================================================== */
+.audio-player {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+    transform: translateZ(0);
+    animation: floatSmooth 6s ease-in-out infinite;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.audio-player.dragging {
+    transition: none !important;
+    animation: none !important;
+    cursor: grabbing !important;
+    filter: drop-shadow(0 25px 50px rgba(0,0,0,0.3));
+    transform: scale(1.05) !important;
+}
+
+@keyframes floatSmooth {
+    0%, 100% { transform: translateY(0) rotateZ(0deg); }
+    25% { transform: translateY(-5px) rotateZ(0.5deg); }
+    75% { transform: translateY(5px) rotateZ(-0.5deg); }
+}
+
+/* --- Barra extendida --- */
+.player-extended {
+    width: 0;
+    height: 70px;
+    border-radius: 35px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(30px) saturate(180%);
+    -webkit-backdrop-filter: blur(30px) saturate(180%);
+    box-shadow: var(--shadow-3),
+                inset 0 1px 0 rgba(255,255,255,0.05);
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 0 20px;
+    opacity: 0;
+    transition: all 0.3s ease;
+    margin-right: 3px;
+    border: 1px solid var(--glass-border);
+    overflow: hidden;
+}
+
+.expanded .player-extended {
+    width: 520px;
+    opacity: 1;
+}
+
+/* --- Avatar circular --- */
+.player-closed {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--glass-bg);
+    backdrop-filter: blur(30px) saturate(180%);
+    -webkit-backdrop-filter: blur(30px) saturate(180%);
+    box-shadow: var(--shadow-2);
+    position: relative;
+    transition: all 0.4s var(--transition-1);
+    cursor: pointer;
+    overflow: hidden;
+    border: 2px solid var(--glass-border);
+}
+
+.player-closed:hover {
+    transform: scale(1.08);
+    box-shadow: var(--shadow-4), 0 0 0 2px var(--golden-amber);
+}
+
+.avatar-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+}
+
+.avatar-image.active {
+    opacity: 1;
+    animation: subtlePulse 2s ease-in-out infinite;
+}
+
+@keyframes subtlePulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.05); }
+}
+
+/* ==========================================================================
+      Botones y Controles del Reproductor
+    ========================================================================== */
+/* --- Botón de expansión --- */
+.expand-button {
+    width: 35px;
+    height: 70px;
+    background: var(--primary-gradient);
+    border-radius: 18px 0 0 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-1);
+    cursor: pointer;
+    transition: all 0.4s var(--transition-1);
+    z-index: 1001;
+    position: relative;
+    margin-right: -3px;
+    border: 1px solid var(--glass-border);
+}
+
+.expand-button::before {
+    content: '‹';
+    color: var(--text-light);
+    font-size: 26px;
+    font-weight: 300;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+    transform: translateX(-2px);
+}
+
+.expanded .expand-button::before {
+    content: '›';
+    transform: translateX(2px);
+}
+
+.expand-button:hover {
+    transform: translateX(-3px) scale(1.02);
+    box-shadow: var(--shadow-2);
+}
+
+/* --- Botón de Play Principal --- */
+.play-button-main {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--bg-gradient-yellow-1);
+    box-shadow: var(--shadow-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.play-button-main:hover {
+    transform: scale(1.12);
+    box-shadow: var(--shadow-3);
+}
+
+.play-icon {
+    width: 0;
+    height: 0;
+    border-left: 14px solid var(--rich-black);
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    margin-left: 3px;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+.play-button-main.playing .play-icon {
+    width: 16px;
+    height: 16px;
+    border: none;
+    background: linear-gradient(90deg, var(--rich-black) 35%, transparent 35%, transparent 65%, var(--rich-black) 65%);
+    margin-left: 0;
+}
+
+/* --- Botones de Navegación, Narrador y Música --- */
+.nav-button, .narrators-button, .music-button {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    position: relative;
+    color: var(--text-light);
+    background: var(--primary-gradient);
+    box-shadow: var(--shadow-1);
+}
+
+.narrators-button {
+    background: var(--secondary-gradient);
+    box-shadow: 0 4px 15px hsla(45, 100%, 70%, 0.25);
+}
+.music-button {
+    background: var(--primary-gradient);
+}
+
+.nav-button:hover, .narrators-button:hover, .music-button:hover {
+    transform: scale(1.12);
+    box-shadow: var(--shadow-2);
+}
+
+.nav-button:active, .narrators-button:active, .music-button:active, .play-button-main:active, .container-play-btn:active {
+    transform: scale(0.95);
+    box-shadow: inset 0 3px 6px hsla(0, 0%, 0%, 0.35),
+                0 2px 4px hsla(0, 0%, 0%, 0.15);
+    filter: brightness(0.9);
+}
+
+.narrators-button::before { content: '👥'; font-size: 20px; }
+.music-button::before { content: '🎵'; font-size: 20px; }
+
+.music-button.muted {
+    position: relative;
+    filter: grayscale(50%) brightness(0.8);
+}
+
+.music-button.muted::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 28px;
+    height: 2px;
+    background: var(--coral-accent);
+    transform: translate(-50%, -50%) rotate(-45deg);
+    border-radius: 1px;
+    box-shadow: 0 0 4px hsla(15, 85%, 70%, 0.5);
+}
+
+.music-button.active {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px hsla(45, 100%, 70%, 0.4);
+}
+
+/* ==========================================================================
+      Selector de Narradores
+    ========================================================================== */
+.narrators-selector {
+    position: absolute;
+    top: calc(100% + 15px);
+    left: 50%;
+    transform: translateX(-50%) translateY(10px) scale(0.9);
+    width: max-content;
+    max-width: 320px;
+    background: var(--rich-black); /* Cambiado a color sólido para mejor contraste y menos "ruido" visual */
+    backdrop-filter: none; /* Eliminado el filtro para mantener la intención de color sólido */
+    -webkit-backdrop-filter: none;
+    border-radius: 20px;
+    padding: 12px;
+    box-shadow: var(--shadow-3);
+    display: flex;
+    gap: 12px;
+    opacity: 0;
+    transition: all 0.3s var(--transition-1);
+    pointer-events: none;
+    z-index: 1001;
+    border: 1px solid var(--glass-border);
+}
+
+.narrator-control.open-upward .narrators-selector {
+    top: auto;
+    bottom: calc(100% + 15px);
+    transform: translateX(-50%) translateY(-10px) scale(0.9);
+}
+
+.narrator-control.is-open .narrators-selector {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+    pointer-events: all;
+}
+
+.narrator-control.is-open.open-upward .narrators-selector {
+    transform: translateX(-50%) translateY(0) scale(1);
+}
+
+.narrator-option {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--primary-gradient);
+    box-shadow: var(--shadow-1);
+    cursor: pointer;
+    transition: all 0.25s ease;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--glass-border);
+}
+
+.narrator-option .preview-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.95;
+}
+
+.narrator-option:hover {
+    transform: scale(1.15) translateY(-4px);
+    box-shadow: var(--shadow-2);
+}
+
+.narrator-option.active {
+    box-shadow: 0 0 0 3px var(--pearl-white),
+                0 0 0 6px var(--bronze-gold);
+    transform: scale(1.08);
+}
+
+.narrator-option::after {
+    content: attr(data-name);
+    position: absolute;
+    bottom: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: var(--fs-8);
+    color: var(--text-secondary);
+    font-weight: var(--fw-600);
+}
+
+/* ==========================================================================
+      Progreso y Ecualizador
+    ========================================================================== */
+.progress-container {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+
+.progress-bar {
+    height: 6px;
+    flex-grow: 1;
+    background: rgba(0,0,0,0.2);
+    border-radius: 3px;
+    cursor: pointer;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.25);
+    transition: height 0.2s ease;
+}
+.progress-bar:hover {
+    height: 8px;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--text-gradient-yellow);
+    border-radius: 3px;
+    position: relative;
+    transition: width 0.2s ease;
+}
+
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -6px;
+    width: 14px;
+    height: 14px;
+    background: var(--pearl-white);
+    border: 3px solid var(--bronze-gold);
+    border-radius: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.progress-bar:hover .progress-fill::after {
+    opacity: 1;
+}
+
+.time-display {
+    font-size: var(--fs-7);
+    color: var(--text-secondary);
+    min-width: 45px;
+    text-align: center;
+    font-weight: var(--fw-600);
+}
+
+.equalizer {
+    display: flex;
+    gap: 3px;
+    align-items: flex-end;
+    height: 24px;
+    margin-right: 8px;
+}
+
+.eq-bar {
+    width: 4px;
+    background: var(--text-gradient-yellow);
+    border-radius: 2px;
+    height: 5px;
+    animation: equalizerDance 1.2s infinite ease-in-out;
+}
+
+.eq-bar:nth-child(1) { animation-delay: 0s; }
+.eq-bar:nth-child(2) { animation-delay: 0.3s; }
+.eq-bar:nth-child(3) { animation-delay: 0.6s; }
+.eq-bar:nth-child(4) { animation-delay: 0.9s; }
+.eq-bar:nth-child(5) { animation-delay: 1.2s; }
+
+@keyframes equalizerDance {
+    0%, 100% { height: 5px; }
+    50% { height: 20px; }
+}
+
+/* ==========================================================================
+      Secciones de Contenido
+    ========================================================================== */
+.sections-container {
+    max-width: 1400px;
+    margin: 120px auto 50px;
+    padding: 0 20px;
+    width: 100%;
+}
+
+.containers-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.content-container {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: var(--shadow-2);
+    position: relative;
+    transition: all 0.3s var(--transition-1);
+    border: 1px solid var(--glass-border);
+}
+
+.content-container:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-3);
+}
+
+.container-play-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--primary-gradient);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: var(--shadow-1);
+    border: none;
+    z-index: 10;
+    transition: all 0.3s ease;
+}
+
+.content-container.playing .container-play-btn {
+    background: var(--secondary-gradient);
+    box-shadow: var(--shadow-2);
+}
+
+.container-play-btn:hover {
+    transform: scale(1.15) rotate(90deg);
+}
+
+.container-play-btn i {
+    color: var(--text-light);
+    font-size: 18px;
+}
+
+.content-container h3 {
+    color: var(--text-primary);
+    margin-bottom: 18px;
+    font-size: var(--fs-2);
+    font-weight: var(--fw-600);
+}
+
+.content-container p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 20px;
+    font-size: var(--fs-5);
+}
+
+.audio-indicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-secondary);
+    font-size: var(--fs-7);
+    margin-top: 15px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    position: relative; /* Agregado para el pseudo-elemento */
+    height: 8px; /* Altura de la barra */
+    background: var(--charcoal);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.audio-indicator::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, var(--golden-amber), transparent);
+    animation: shine 2s linear infinite;
+}
+
+.content-container.playing .audio-indicator {
+    opacity: 1;
+}
+
+@keyframes shine {
+    from { left: -100%; }
+    to { left: 100%; }
+}
+
+/* ==========================================================================
+      WebP Overlay (Avatar en contenedores)
+    ========================================================================== */
+.webp-overlay-container {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    width: 70px;
+    height: 70px;
+    background: var(--charcoal);
+    border-radius: 50%;
+    z-index: 20;
+    overflow: hidden;
+    box-shadow: var(--shadow-3),
+                0 0 0 3px var(--pearl-white);
+    transform: translate(50%, -50%) scale(0);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.4s var(--transition-1);
+}
+
+.webp-overlay-container.visible {
+    transform: translate(50%, -50%) scale(1);
+    opacity: 1;
+    pointer-events: all;
+    animation: overlayPulse 2s ease-in-out infinite;
+}
+
+@keyframes overlayPulse {
+    50% { box-shadow: var(--shadow-4), 0 0 0 5px var(--golden-amber); }
+}
+
+.overlay-webp {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+/* ==========================================================================
+      Mejoras Adicionales y Responsive Design
+    ========================================================================== */
+.audio-player.player-centered {
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    transition: left 0.3s ease,
+                transform 0.3s ease;
+    animation: none !important;
+}
+
+.micro-alert {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    padding: 10px 20px;
+    border-radius: 8px;
+    box-shadow: var(--shadow-2);
+    color: var(--text-light);
+    font-size: var(--fs-6);
+    z-index: 2000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.micro-alert.show {
+    opacity: 1;
+}
+
+.pause-info {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: var(--fs-8);
+    color: var(--warm-gray);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.content-container:hover .pause-info {
+    opacity: 1;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    margin-bottom: 35px;
+    text-align: center;
+    color: var(--text-light);
+    position: relative;
+    padding-bottom: 20px;
+    font-weight: var(--fw-600);
+    text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.section-title:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 4px;
+    background: var(--text-gradient-yellow);
+    border-radius: 2px;
+}
+
+/* Optimizaciones y Arrastre */
+.player-extended, .narrator-control { overflow: visible; }
+.audio-player.dragging {
+    transition: none !important;
+    animation: none !important;
+    z-index: 10000;
+}
+.audio-player.dragging .player-closed {
+    cursor: grabbing !important;
+    transform: scale(1.1) !important;
+    box-shadow: var(--shadow-5),
+                0 0 0 3px var(--golden-amber) !important;
+}
+.audio-player:not(.dragging) {
+    transition: left 0.3s ease, top 0.3s ease, transform 0.3s ease;
+}
+.avatar-image, .overlay-webp {
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+}
+
+/* --- Diseño Adaptable (Responsive) --- */
+@media (max-width: 768px) {
+    .expanded .player-extended {
+        width: calc(100vw - 80px);
+        max-width: 400px;
+        gap: 10px;
+    }
+    .equalizer, .time-display {
+        display: none;
+    }
+    .audio-player.player-centered {
+        left: 50% !important;
+        right: auto !important;
+        transform: translateX(-50%) !important;
+    }
+}
+
+@media (max-width: 480px) {
+    body { padding: 10px; }
+    .audio-player { top: 10px; right: 10px; }
+    .expanded .player-extended { width: calc(100vw - 60px); height: 60px; }
+    .nav-button, .narrators-button, .music-button { width: 35px; height: 35px; }
+    .play-button-main { width: 40px; height: 40px; }
+    .expand-button { width: 30px; height: 60px; }
+    .player-closed { width: 70px; height: 70px; }
+    .avatar-image { width: 55px; height: 55px; }
+    .narrator-option { width: 48px; height: 48px; }
+    .content-container { padding: 20px; }
+    .containers-wrapper { grid-template-columns: 1fr; gap: 20px; }
+    .webp-overlay-container { width: 60px; height: 60px; top: 25px; right: 25px; }
+}
+
